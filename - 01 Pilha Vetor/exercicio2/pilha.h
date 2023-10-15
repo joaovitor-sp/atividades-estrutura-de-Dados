@@ -32,7 +32,7 @@ elemento Desempilhar(pilha *p) {
 p->topo--;
 return p->vet[p->topo];
 }
-void desempilhaArquivo(int num, pilha p) {
+void empilhaArquivo(int num, pilha p) {
     FILE *arquivo;
     arquivo = fopen("exemplo.txt", "w");
     while(PilhaVazia(&p) == FALSO) {
@@ -41,7 +41,7 @@ void desempilhaArquivo(int num, pilha p) {
     }
 }
 
-void empilhaArquivo(pilha p) {
+void desempilhaArquivo(pilha p) {
     FILE *arquivo;
     arquivo = fopen("exemplo.txt", "r");
     char linha[100];

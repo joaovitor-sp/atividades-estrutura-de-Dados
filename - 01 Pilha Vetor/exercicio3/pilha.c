@@ -5,50 +5,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define TAM 10
-typedef int elemento;
+typedef char elemento;
 #include "pilha.h"
 int main() {
-    pilha minhaPilha;
-    CriarPilha(&minhaPilha);
-
-    int numPessoas = 10; // Número de pessoas a serem inseridas na pilha
-
-    for (int i = 0; i < numPessoas; i++) {
-        Pessoa pessoa;
-
-        printf("Digite o CPF da pessoa %d: ", i + 1);
-        scanf("%s", pessoa.cpf);
-
-        printf("Digite o nome da pessoa %d: ", i + 1);
-        scanf("%s", pessoa.nome);
-
-        printf("Digite o endereço da pessoa %d: ", i + 1);
-        scanf("%s", pessoa.endereco);
-
-        printf("Digite o telefone da pessoa %d: ", i + 1);
-        scanf("%s", pessoa.telefone);
-
-        printf("Digite o celular da pessoa %d: ", i + 1);
-        scanf("%s", pessoa.celular);
-
-        printf("Digite a data de nascimento da pessoa %d (dd/mm/aaaa): ", i + 1);
-        scanf("%s", pessoa.dataNascimento);
-
-        printf("Digite a data de admissão da pessoa %d (dd/mm/aaaa): ", i + 1);
-        scanf("%s", pessoa.dataAdmissao);
-
-        printf("Digite o departamento da pessoa %d: ", i + 1);
-        scanf("%s", pessoa.departamento);
-
-        printf("Digite o cargo da pessoa %d: ", i + 1);
-        scanf("%s", pessoa.cargo);
-
-        printf("Digite o salário da pessoa %d: ", i + 1);
-        scanf("%f", &pessoa.salario);
-
-        Empilhar(&minhaPilha, pessoa);
+char num[50];
+pilha p;
+char dados[TAM][50] = {
+        "CPF",
+        "Nome",
+        "Endereço",
+        "Telefone",
+        "Celular",
+        "Data de Nascimento",
+        "Data de Admissão",
+        "Departamento",
+        "Cargo",
+        "Salário"
+    };
+CriarPilha(&p);
+int dado = 0;
+while(PilhaCheia(&p) == FALSO) {
+        printf("\nInforme o %s: ", dados[dado]);
+        dado++;
+        scanf("%s", num);
+        Empilhar(&p, &num);
+        printf("%d", dado);
     }
-
+    SalvarPilhaEmArquivo("pilha.bin", &p);
+    LerPilhaDeArquivo("pilha.bin", &p);
+    // desempilhaArquivo(p);
+// printf("\nNumeros informados: ");
+// while(PilhaVazia(&p) == FALSO) {
+// num = Desempilhar(&p);
+// printf("\n%d", num);
+// }
 printf("\n");
 system("pause");
 return 0;

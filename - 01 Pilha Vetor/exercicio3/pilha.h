@@ -5,24 +5,8 @@
 */
 #define VERDADEIRO 1
 #define FALSO 0
-
-struct Pessoa {
-    char cpf[12];
-    char nome[100];
-    char endereco[200];
-    char telefone[15];
-    char celular[15];
-    char dataNascimento[11];
-    char dataAdmissao[11];
-    char departamento[50];
-    char cargo[50];
-    float salario;
-};
-
-typedef struct Pessoa Pessoa;
-
 struct tipo_pilha {
-Pessoa vet[TAM];
+elemento vet[TAM];
 int topo;
 };
 typedef struct tipo_pilha pilha;
@@ -39,22 +23,37 @@ int PilhaCheia(pilha *p) {
 return(p->topo == TAM);
 }
 //Insere um elemento na pilha.
-void Empilhar(pilha *p, Pessoa e) {
+void Empilhar(pilha *p, elemento e) {
 p->vet[p->topo] = e;
 p->topo++;
 }
 //Retira um elemento na pilha.
-Pessoa Desempilhar(pilha *p) {
+elemento Desempilhar(pilha *p) {
 p->topo--;
 return p->vet[p->topo];
 }
 
-void empilhaArquivo(pilha p) {
-    FILE *arquivo;
-    arquivo = fopen("exemplo.txt", "r");
-    char linha[100];
-    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
-        Empilhar(&p, linha);
+void SalvarPilhaEmArquivo(const char *nomeArquivo, pilha *p) {
+    FILE *arquivo = fopen(nomeArquivo, "wb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return;
     }
 
+    fwrite(p, sizeof(pilha), 1, arquivo);
+    fclose(arquivo);
+    while(PilhaVazia(&p) == FALSO) {
+        num = Desempilhar(&p);
+    }
+}
+
+void LerPilhaDeArquivo(const char *nomeArquivo, pilha *p) {
+    FILE *arquivo = fopen(nomeArquivo, "rb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para leitura.\n");
+        return;
+    }
+
+    fread(p, sizeof(pilha), 1, arquivo);
+    fclose(arquivo);
 }

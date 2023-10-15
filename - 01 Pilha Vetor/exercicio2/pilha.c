@@ -16,8 +16,8 @@ printf("\nInforme um numero inteiro: ");
 scanf("%d", &num);
 Empilhar(&p, num);
 }
-desempilhaArquivo(num, p);
-empilhaArquivo(p);
+empilhaArquivo(num, p);
+desempilhaArquivo(p);
 printf("\nNumeros informados: ");
 while(PilhaVazia(&p) == FALSO) {
 num = Desempilhar(&p);
