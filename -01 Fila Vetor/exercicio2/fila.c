@@ -1,26 +1,26 @@
 /*
 * Programa que lê números inteiros a partir
-* do teclado e os armazena em uma pilha.
+* do teclado e os armazena em uma fila.
 */
 #include <stdio.h>
 #include <stdlib.h>
 #define TAM 10
 typedef int elemento;
-#include "pilha.h"
+#include "fila.h"
 int main() {
 int num;
-pilha p;
-CriarPilha(&p);
-while(PilhaCheia(&p) == FALSO) {
+fila f;
+CriarFila(&f);
+while(FilaCheia(&f) == FALSO) {
 printf("\nInforme um numero inteiro: ");
 scanf("%d", &num);
-Empilhar(&p, num);
+Enfileirar(&f, num);
 }
-empilhaArquivo(num, p);
-desempilhaArquivo(p);
+enfileirarArquivo(num, f);
+desenfileirarArquivo(f);
 printf("\nNumeros informados: ");
-while(PilhaVazia(&p) == FALSO) {
-num = Desempilhar(&p);
+while(FilaVazia(&f) == FALSO) {
+num = Desenfileirar(&f);
 printf("\n%d", num);
 }
 printf("\n");
